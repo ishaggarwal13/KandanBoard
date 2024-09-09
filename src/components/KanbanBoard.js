@@ -4,7 +4,7 @@ import { collection, onSnapshot, updateDoc, doc } from "firebase/firestore";
 import { db } from "../Firebase";
 import Column from "./Column";
 import TaskModal from "./TaskModal";
-import { Button, Typography, Snackbar } from "@mui/material";
+import { Button, Typography, Snackbar, Paper, Box } from "@mui/material";
 
 const KanbanBoard = () => {
   const [tasks, settasks] = useState([]);
@@ -33,7 +33,6 @@ const KanbanBoard = () => {
       const originalStatus = updatedTask.status;
       updatedTask.status = destination.droppableId;
 
-      // Optimistic UI update
       settasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === updatedTask.id
@@ -48,7 +47,6 @@ const KanbanBoard = () => {
         setError("Failed to update task status");
         console.error("Error updating document: ", error);
 
-        // Revert UI on failure
         settasks((prevTasks) =>
           prevTasks.map((task) =>
             task.id === updatedTask.id
@@ -61,10 +59,35 @@ const KanbanBoard = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <Typography variant="h5" align="center" gutterBottom>
-        Desktop & Mobile Application
-      </Typography>
+    <div style={{ padding: "110px" }}>
+      <Paper
+        elevation={3}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "20px",
+          marginBottom: "20px",
+          borderRadius: "8px",
+        }}
+      >
+        <Typography variant="h5" style={{ margin: 0 }}>
+          Desktop & Mobile Application
+        </Typography>
+        <Button
+          onClick={() => setOpen(true)}
+          variant="contained"
+          style={{
+            marginLeft: "auto",
+            backgroundColor: "#8A31E5",
+            color: "white",
+          }}
+        >
+          Create Task
+        </Button>
+      </Paper>
+      <TaskModal open={open} handleClose={() => setOpen(false)} />
+
       <DragDropContext onDragEnd={handleDragEnd}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {["TODO", "IN PROGRESS", "COMPLETED"].map((status) => (
@@ -76,15 +99,6 @@ const KanbanBoard = () => {
           ))}
         </div>
       </DragDropContext>
-      <Button
-        onClick={() => setOpen(true)}
-        variant="contained"
-        color="primary"
-        style={{ marginTop: "20px" }}
-      >
-        Create Task
-      </Button>
-      <TaskModal open={open} handleClose={() => setOpen(false)} />
 
       <Snackbar
         open={!!error}
