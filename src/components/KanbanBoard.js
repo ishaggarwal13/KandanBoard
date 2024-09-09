@@ -42,7 +42,7 @@ const KanbanBoard = () => {
                     ))}
                 </div>
             </DragDropContext>
-            <Button onClick={() => setOpen(true)} varient="contained" color="primary" style={{ marginTop: '20px'}}>
+            <Button onClick={() => setOpen(true)} variant="contained" color="primary" style={{ marginTop: '20px'}}>
                 Create Task
             </Button>
             <TaskModal open={open} handleClose={() => setOpen(false)} />
