@@ -18,6 +18,11 @@
 .env.test.local
 .env.production.local
 
+# Add this section to ignore the environment file containing Firebase credentials
+# Environment variables
+.env
+.env.*.local
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
