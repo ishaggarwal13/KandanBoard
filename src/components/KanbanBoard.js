@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { collection, onSnapshot, updateDoc, doc } from "firebase/firestore";
 import { db } from "firebase";
+import Column from './Column';
+import TaskModal from './TaskModal';
 import { Button, Typograghy } from "@mui/material"
 
 const KanbanBoard = () => {
@@ -40,10 +42,12 @@ const KanbanBoard = () => {
                     ))}
                 </div>
             </DragDropContext>
-            <Button onClick={() => setOpen(true)} varient="contained" color="primary" style={{ marginTop: '20px' }}>
+            <Button onClick={() => setOpen(true)} varient="contained" color="primary" style={{ marginTop: '20px'}}>
                 Create Task
             </Button>
             <TaskModal open={open} handleClose={() => setOpen(false)} />
         </div>
     );
-}
+};
+
+export default KanbanBoard;
