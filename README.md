@@ -27,7 +27,14 @@ To run the project locally, follow these steps:
     npm install
     ```
 
-3. **Configure Environment Variables**
+2. **Install other Dependencies**
+
+    ```bash
+    npm install firebase
+    npm install react-beautiful-dnd @mui/material @emotion/react @emotion/styled
+    ```
+
+4. **Configure Environment Variables**
 
     Create a `.env` file in the root directory and add your environment variables:
 
@@ -42,7 +49,7 @@ To run the project locally, follow these steps:
     REACT_APP_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
     ```
 
-4. **Run the Development Server**
+5. **Run the Development Server**
 
     ```bash
     npm start
